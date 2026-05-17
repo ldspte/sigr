@@ -4,6 +4,8 @@ import morgan from 'morgan';
 import dotenv from 'dotenv';
 import pool from './config/db.js';
 import authRoutes from './routes/auth.routes.js';
+import menuRoutes from './routes/menu.routes.js';
+import reservasRoutes from './routes/reservas.routes.js';
 
 dotenv.config();
 
@@ -17,6 +19,8 @@ app.use(express.json());
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/menu', menuRoutes);
+app.use('/api/reservas', reservasRoutes);
 
 // Basic Route
 app.get('/', (req, res) => {
