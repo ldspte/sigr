@@ -20,6 +20,9 @@ export default function Navbar() {
         <Link to="/" className="nav-link">Inicio</Link>
         <Link to="/menu" className="nav-link">Menú</Link>
         <Link to="/reservas" className="nav-link">Reservas</Link>
+        {user && (user.rol === 'mesero' || user.rol === 'administrador') && (
+          <Link to="/dashboard" className="nav-link" style={{ color: 'var(--primary-color)', fontWeight: 'bold' }}>Dashboard Staff</Link>
+        )}
         {user ? (
           <div className="nav-user">
             <span style={{ color: 'var(--text-muted)' }}>Hola, {user.nombre}</span>
