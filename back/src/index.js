@@ -6,6 +6,8 @@ import pool from './config/db.js';
 import authRoutes from './routes/auth.routes.js';
 import menuRoutes from './routes/menu.routes.js';
 import reservasRoutes from './routes/reservas.routes.js';
+import pedidosRoutes from './routes/pedidos.routes.js';
+import facturacionRoutes from './routes/facturacion.routes.js';
 
 dotenv.config();
 
@@ -21,6 +23,8 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/menu', menuRoutes);
 app.use('/api/reservas', reservasRoutes);
+app.use('/api/pedidos', pedidosRoutes);
+app.use('/api/facturacion', facturacionRoutes);
 
 // Basic Route
 app.get('/', (req, res) => {
