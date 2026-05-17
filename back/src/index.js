@@ -3,6 +3,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
 import pool from './config/db.js';
+import authRoutes from './routes/auth.routes.js';
 
 dotenv.config();
 
@@ -13,6 +14,9 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
+
+// Routes
+app.use('/api/auth', authRoutes);
 
 // Basic Route
 app.get('/', (req, res) => {
