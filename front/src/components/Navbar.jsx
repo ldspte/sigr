@@ -18,6 +18,8 @@ export default function Navbar() {
       
       <div className="nav-links">
         <Link to="/" className="nav-link">Inicio</Link>
+        <Link to="/menu" className="nav-link">Menú</Link>
+        <Link to="/reservas" className="nav-link">Reservas</Link>
         {user ? (
           <div className="nav-user">
             <span style={{ color: 'var(--text-muted)' }}>Hola, {user.nombre}</span>

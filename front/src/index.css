@@ -159,3 +159,10 @@ body {
 .text-center { text-align: center; }
 .mt-4 { margin-top: 1rem; }
 .text-primary { color: var(--primary-color); }
+
+/* Menu Card Hover */
+.menu-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+  border-color: rgba(249, 115, 22, 0.5);
+}
