@@ -32,9 +32,20 @@ export const createPedido = async (req, res) => {
         const total = detalles.reduce((acc, item) => acc + (item.cantidad * item.precio_unitario), 0);
 
         // 1. Insertar Cabecera del Pedido
+        let mesaIdReal = null;
+        if (mesa_id) {
+            const [mesas] = await connection.query('SELECT id FROM mesas WHERE numero_mesa = ?', [mesa_id]);
+            if (mesas.length > 0) {
+                mesaIdReal = mesas[0].id;
+            } else {
+                const [insertMesa] = await connection.query('INSERT INTO mesas (numero_mesa, capacidad) VALUES (?, 4)', [mesa_id]);
+                mesaIdReal = insertMesa.insertId;
+            }
+        }
+
         const [pedidoResult] = await connection.query(
             'INSERT INTO pedidos (usuario_id, mesero_id, mesa_id, total) VALUES (?, ?, ?, ?)',
-            [usuario_id, mesero_id, mesa_id, total]
+            [usuario_id, mesero_id, mesaIdReal, total]
         );
         const pedidoId = pedidoResult.insertId;
 

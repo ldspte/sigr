@@ -23,6 +23,9 @@ export default function Navbar() {
         {user && (user.rol === 'mesero' || user.rol === 'administrador') && (
           <Link to="/dashboard" className="nav-link" style={{ color: 'var(--primary-color)', fontWeight: 'bold' }}>Dashboard Staff</Link>
         )}
+        {user && user.rol === 'administrador' && (
+          <Link to="/admin-menu" className="nav-link" style={{ color: 'var(--success)', fontWeight: 'bold' }}>Gestión Menú</Link>
+        )}
         {user ? (
           <div className="nav-user">
             <span style={{ color: 'var(--text-muted)' }}>Hola, {user.nombre}</span>

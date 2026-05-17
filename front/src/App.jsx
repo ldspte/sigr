@@ -7,6 +7,7 @@ import MenuDigital from './pages/MenuDigital';
 import Reservas from './pages/Reservas';
 import StaffDashboard from './pages/StaffDashboard';
 import NuevoPedido from './pages/NuevoPedido';
+import AdminMenu from './pages/AdminMenu';
 
 function Home() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={<StaffDashboard />} />
           <Route path="/nuevo-pedido" element={<NuevoPedido />} />
+          <Route path="/admin-menu" element={<AdminMenu />} />
         </Routes>
       </Router>
     </AuthProvider>

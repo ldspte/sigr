@@ -20,9 +20,20 @@ export const createReserva = async (req, res) => {
         const { fecha_hora, mesa_id } = req.body;
         const usuario_id = req.usuario.id; // El ID viene del token JWT
 
+        let mesaIdReal = null;
+        if (mesa_id) {
+            const [mesas] = await pool.query('SELECT id FROM mesas WHERE numero_mesa = ?', [mesa_id]);
+            if (mesas.length > 0) {
+                mesaIdReal = mesas[0].id;
+            } else {
+                const [insertMesa] = await pool.query('INSERT INTO mesas (numero_mesa, capacidad) VALUES (?, 4)', [mesa_id]);
+                mesaIdReal = insertMesa.insertId;
+            }
+        }
+
         const [result] = await pool.query(
             'INSERT INTO reservas (usuario_id, mesa_id, fecha_hora) VALUES (?, ?, ?)',
-            [usuario_id, mesa_id, fecha_hora]
+            [usuario_id, mesaIdReal, fecha_hora]
         );
         res.status(201).json({ id: result.insertId, usuario_id, mesa_id, fecha_hora, estado: 'pendiente' });
     } catch (error) {

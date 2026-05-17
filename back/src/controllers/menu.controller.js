@@ -50,10 +50,40 @@ export const createPlato = async (req, res) => {
 export const updatePlatoStatus = async (req, res) => {
     try {
         const { id } = req.params;
-        const { estado } = req.body; // 'disponible' o 'agotado'
+        const { estado } = req.body;
+        
         await pool.query('UPDATE platos SET estado = ? WHERE id = ?', [estado, id]);
-        res.json({ message: 'Estado del plato actualizado exitosamente' });
+        res.json({ message: 'Estado actualizado exitosamente' });
     } catch (error) {
-        res.status(500).json({ message: 'Error al actualizar plato', error: error.message });
+        res.status(500).json({ message: 'Error al actualizar estado', error: error.message });
+    }
+};
+
+export const deletePlato = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const [result] = await pool.query('DELETE FROM platos WHERE id = ?', [id]);
+        
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: 'Plato no encontrado' });
+        }
+        res.json({ message: 'Plato eliminado exitosamente' });
+    } catch (error) {
+        res.status(500).json({ message: 'Error al eliminar plato', error: error.message });
+    }
+};
+
+export const deleteCategoria = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const [result] = await pool.query('DELETE FROM categorias WHERE id = ?', [id]);
+        
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: 'Categoría no encontrada' });
+        }
+        res.json({ message: 'Categoría eliminada exitosamente' });
+    } catch (error) {
+        // Puede fallar si hay platos asignados a esta categoría por la restricción de llave foránea
+        res.status(500).json({ message: 'Error al eliminar categoría', error: error.message });
     }
 };
