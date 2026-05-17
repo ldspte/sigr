@@ -8,6 +8,7 @@ import Reservas from './pages/Reservas';
 import StaffDashboard from './pages/StaffDashboard';
 import NuevoPedido from './pages/NuevoPedido';
 import AdminMenu from './pages/AdminMenu';
+import StaffReservas from './pages/StaffReservas';
 
 function Home() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path="/dashboard" element={<StaffDashboard />} />
           <Route path="/nuevo-pedido" element={<NuevoPedido />} />
           <Route path="/admin-menu" element={<AdminMenu />} />
+          <Route path="/staff-reservas" element={<StaffReservas />} />
         </Routes>
       </Router>
     </AuthProvider>

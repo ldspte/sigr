@@ -21,7 +21,10 @@ export default function Navbar() {
         <Link to="/menu" className="nav-link">Menú</Link>
         <Link to="/reservas" className="nav-link">Reservas</Link>
         {user && (user.rol === 'mesero' || user.rol === 'administrador') && (
-          <Link to="/dashboard" className="nav-link" style={{ color: 'var(--primary-color)', fontWeight: 'bold' }}>Dashboard Staff</Link>
+          <>
+            <Link to="/staff-reservas" className="nav-link" style={{ color: 'var(--primary-color)' }}>Gestión Reservas</Link>
+            <Link to="/dashboard" className="nav-link" style={{ color: 'var(--primary-color)', fontWeight: 'bold' }}>Dashboard Staff</Link>
+          </>
         )}
         {user && user.rol === 'administrador' && (
           <Link to="/admin-menu" className="nav-link" style={{ color: 'var(--success)', fontWeight: 'bold' }}>Gestión Menú</Link>
